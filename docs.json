@@ -11,30 +11,6 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Guides",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "index",
-              "quickstart",
-              "development"
-            ]
-          },
-          {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "SoleasPay API Documentation",
         "groups": [
           {
@@ -73,6 +49,24 @@
               "link/endpoint/initWallet",
               "link/endpoint/initTrans",
               "link/endpoint/fiat"
+            ]
+          }
+        ]
+      },
+      {
+       "tab": "SoSMS API Documentation",
+        "groups": [
+          {
+            "group": "GENERAL",
+            "pages": [
+              "sms/introduction"
+            ]
+          },
+          {
+            "group": "ENDPOINTS",
+            "pages": [
+              "sms/endpoint/apiKey",
+              "sms/endpoint/sendSms"
             ]
           }
         ]

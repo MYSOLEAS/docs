@@ -35,7 +35,7 @@
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "SoleasPay API Documentation",
         "groups": [
           {
             "group": "GENERAL",
@@ -47,7 +47,7 @@
             "group": "ENDPOINTS",
             "pages": [
               "api-reference/endpoint/getBearer",
-              "api-reference/endpoint/getavailableServices",
+              "api-reference/endpoint/getServices",
               "api-reference/endpoint/collectionPayment",
               "api-reference/endpoint/disbursePayment",
               "api-reference/endpoint/transfertFunds",
@@ -57,13 +57,32 @@
             ]
           }
         ]
+      },
+      {
+       "tab": "Link SoPay API Documentation",
+        "groups": [
+          {
+            "group": "GENERAL",
+            "pages": [
+              "link/introduction"
+            ]
+          },
+          {
+            "group": "ENDPOINTS",
+            "pages": [
+              "link/endpoint/initWallet",
+              "link/endpoint/initTrans",
+              "link/endpoint/fiat"
+            ]
+          }
+        ]
       }
     ],
     "global": {
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
+          "href": "https://soleapay.com/docs",
           "icon": "book-open-cover"
         },
         {

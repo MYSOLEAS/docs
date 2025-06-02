@@ -1,0 +1,406 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "SoleasPay API",
+    "description": "API to authenticate and receive a bearer token from SoleasPay",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://soleaspay.com"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+ "/api/agent/link/new": {
+  "get": {
+    "summary": "Init new wallet",
+    "description": "Link a user in your app to a Sopay wallet.",
+    "parameters": [
+      {
+        "name": "x-api-key",
+        "in": "header",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "Your API key"
+      },
+      {
+        "name": "email",
+        "in": "query",
+        "required": true,
+        "schema": { "type": "string", "format": "email" },
+        "description": "User's email address"
+      },
+      {
+        "name": "phone",
+        "in": "query",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "User's phone number"
+      },
+      {
+        "name": "phoneCountry",
+        "in": "query",
+        "required": true,
+        "schema": { "type": "string" },
+        "description": "Country phone code (e.g., +237)"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Wallet linked or created successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": { "type": "boolean", "example": true },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "apikey": { "type": "string", "example": "XLkynIRt7StyFdxnYQLxTyDxhk-WEjWQ1DEY-cwHMN8" },
+                    "matricule": { "type": "string", "example": "SP20231M" }
+                  }
+                },
+                "message": { "type": "string", "example": "link success" }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Error during linking",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "code": { "type": "string", "example": "400" },
+                "success": { "type": "boolean", "example": false },
+                "message": { "type": "string", "example": "Error message" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/agent/link/init": {
+  "post": {
+    "summary": "Init new transaction",
+    "description": "Initialize a new transaction before sending a payment, to prepare redistribution for involved SoPay users.",
+    "tags": ["Transactions"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "payment_receiver": {
+                "type": "string",
+                "example": "SP20208U",
+                "description": "The SoPay ID of the main payment receiver."
+              },
+              "payment_id": {
+                "type": "string",
+                "example": "20000553G",
+                "description": "A unique order ID for the current payment."
+              },
+              "amount": {
+                "type": "number",
+                "format": "float",
+                "example": 10000,
+                "description": "The total amount of the transaction."
+              },
+              "distribution": {
+                "type": "array",
+                "description": "List of users (by matricule) and the percentage they will receive.",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "matricule": {
+                      "type": "string",
+                      "example": "SP20231M",
+                      "description": "The SoPay matricule of a distribution recipient."
+                    },
+                    "rate": {
+                      "type": "number",
+                      "format": "float",
+                      "example": 15,
+                      "description": "The percentage share this user receives."
+                    }
+                  },
+                  "required": ["matricule", "rate"]
+                }
+              }
+            },
+            "required": ["payment_receiver", "payment_id", "amount", "distribution"]
+          }
+        }
+      }
+    },
+    "parameters": [
+      {
+        "name": "x-api-key",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "Your-Apikey-Here"
+        },
+        "description": "Your authentication API key."
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Transaction initialized successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": { "type": "boolean", "example": true },
+                "message": { "type": "string", "example": "Transaction linked successfully" }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Invalid request or failed to initialize transaction",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": { "type": "boolean", "example": false },
+                "message": { "type": "string", "example": "Error message" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/api/agent/link/fiat-distribution": {
+  "post": {
+    "summary": "Fiat Payment Distribution",
+    "description": "Redistribute a fiat payment received outside SoPay by specifying payer details and distribution breakdown.",
+    "tags": ["Transactions"],
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "data": {
+                "type": "object",
+                "properties": {
+                  "payer": {
+                    "type": "string",
+                    "example": "SP202116A",
+                    "description": "The SoPay ID of the user making the payment."
+                  },
+                  "currency": {
+                    "type": "string",
+                    "example": "XAF",
+                    "description": "The currency of the received fiat payment."
+                  },
+                  "amount": {
+                    "type": "number",
+                    "format": "float",
+                    "example": 10000,
+                    "description": "The total amount received in fiat."
+                  },
+                  "distribution": {
+                    "type": "array",
+                    "description": "Array of users who will receive a share of the payment.",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "matricule": {
+                          "type": "string",
+                          "example": "SP20231M",
+                          "description": "The SoPay ID of the beneficiary."
+                        },
+                        "rate": {
+                          "type": "number",
+                          "format": "float",
+                          "example": 15,
+                          "description": "Percentage of the total amount allocated to the user."
+                        }
+                      },
+                      "required": ["matricule", "rate"]
+                    }
+                  }
+                },
+                "required": ["payer", "currency", "amount", "distribution"]
+              }
+            },
+            "required": ["data"]
+          }
+        }
+      }
+    },
+    "parameters": [
+      {
+        "name": "x-api-key",
+        "in": "header",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "Your-Apikey-Here"
+        },
+        "description": "Your authentication API key"
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Fiat distribution completed successfully",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "fiat distribution success"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Failed to process fiat distribution",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Error message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+  },
+  "webhooks": {
+    "/plant/webhook": {
+      "post": {
+        "description": "Information about a new plant added to the store",
+        "requestBody": {
+          "description": "Plant added to the store",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/NewPlant"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Return a 200 status to indicate that the data was received successfully"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Plant": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "description": "The name of the plant",
+            "type": "string"
+          },
+          "tag": {
+            "description": "Tag to specify the type",
+            "type": "string"
+          }
+        }
+      },
+      "NewPlant": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Plant"
+          },
+          {
+            "required": [
+              "id"
+            ],
+            "type": "object",
+            "properties": {
+              "id": {
+                "description": "Identification number of the plant",
+                "type": "integer",
+                "format": "int64"
+              }
+            }
+          }
+        ]
+      },
+      "Error": {
+        "required": [
+          "error",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

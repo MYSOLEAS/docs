@@ -1,33 +1,66 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'SoleasPay is a payment gateway allowing to collect and emit payments on web and mobile applications of their customers through their mobile money wallet, bank and even crypto accounts.'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  If you're not looking to build API reference documentation, you can contact
+  our team for more details.
 </Note>
 
-## Welcome
+## API Base
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+SoleasPay Endpoints support GET, POST, PUT, or DELETE requests.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="SoleasPay"
+  icon="globe"
+  href="https://soleaspay.com"
 >
-  View the OpenAPI specification file
+  View the website for specification details
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+SoleasPay API requires authenticated tokens in all request headers.  
+Depending on the endpoint prefix, they accept:
 
-```json
-"security": [
-  {
-    "bearerAuth": []
+- **Bearer Token**: For all endpoints starting with `/api/action`
+- **x-api-key**: For all endpoints starting with `/api/agent`
+
+## Rate Limits
+
+The number of requests is limited to **500 requests per hour per IP address**.  
+If you need a higher limit, please [contact us](https://soleaspay.com).  
+All IPs sending excessive requests will be temporarily blocked.
+
+## Callback
+
+<Note>
+  In asynchronous systems, all requests will be processed and the final state
+  will be sent to your application through your callback endpoint.
+
+  For security reasons, all our requests must include an `x-private-key` header.
+  Its value is the SHA-512 hash of your secret key received after configuring
+  your callback endpoint.
+</Note>
+
+### Sample Callback Request
+
+```bash
+curl --location 'https://your-callback-endpoint.com' \
+--header 'x-private-key: bc0d4ddd93081cecc2770b82f37158a26083ccd07efe46a4c90d698ac481325543d46610a0bac7ea9b6a00013d800b82d0369f1ba296e16beab79e16ebdc0b9b' \
+--header 'Content-Type: application/json' \
+--data '{
+  "success": true,
+  "status": "SUCCESS",
+  "created_at": "2025-05-29T13:45:00Z",
+  "data": {
+    "operation": "withdraw",
+    "reference": "INT123456",
+    "external_reference": "ORD654321",
+    "transaction_reference": "TXR0987654321",
+    "amount": "100.00",
+    "currency": "USD"
   }
-]
-```
+}'

@@ -859,7 +859,352 @@
       }
     }
   }
-}
+},
+    "/api/action/card/user": {
+      "post": {
+        "summary": "Create a new user",
+        "description": "Create a user who can own virtual cards",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "first_name": {"type": "string", "example": "John"},
+                  "last_name": {"type": "string", "example": "Doe"},
+                  "email": {"type": "string", "format": "email", "example": "john@gmail.com"},
+                  "country_code": {"type": "string", "example": "CM"},
+                  "contact": {"type": "string", "example": "698479723"},
+                  "dob": {"type": "string", "format": "date", "example": "2010-01-01"},
+                  "is_business": {"type": "boolean", "example": false},
+                  "business_name": {"type": "string", "example": "NAN"},
+                  "billing_adress": {"type": "string", "example": "kotto"},
+                  "billing_city": {"type": "string", "example": "DOUALA"},
+                  "billing_country": {"type": "string", "example": "CAMEROON"},
+                  "billing_state": {"type": "string", "example": "littoral"},
+                  "billing_postal_code": {"type": "string", "example": "237"},
+                  "id_number": {"type": "string", "example": "00858574849"}
+                },
+                "required": [
+                  "first_name", "last_name", "email", "country_code", 
+                  "contact", "dob", "is_business", "billing_adress",
+                  "billing_city", "billing_country", "id_number"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {"type": "string", "example": "SP6VC"},
+                    "reference": {"type": "string", "example": "USR12345"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "List all users",
+        "description": "Get a list of all card users",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "user_id": {"type": "string"},
+                      "name": {"type": "string"},
+                      "email": {"type": "string"},
+                      "created_at": {"type": "string", "format": "date-time"}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/action/card/user/{reference}": {
+      "get": {
+        "summary": "Get user details",
+        "description": "Get details for a specific user",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "reference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user_id": {"type": "string"},
+                    "first_name": {"type": "string"},
+                    "last_name": {"type": "string"},
+                    "email": {"type": "string"},
+                    "cards": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/action/card/{userId}": {
+      "post": {
+        "summary": "Create a virtual card",
+        "description": "Create a new virtual card for a user",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "balance": {"type": "string", "example": "10"},
+                  "currency": {"type": "string", "example": "USD"},
+                  "card_type": {"type": "string", "enum": ["VISA", "MASTERCARD"]},
+                  "category": {"type": "string", "enum": ["PERSONAL", "BUSINESS"]},
+                  "grade": {"type": "string", "enum": ["BASIC", "PREMIUM"]}
+                },
+                "required": ["balance", "currency", "card_type", "category", "grade"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Card created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "card_id": {"type": "string"},
+                    "card_number": {"type": "string"},
+                    "expiry": {"type": "string"},
+                    "cvv": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/action/card/{id}": {
+      "get": {
+        "summary": "Get card details",
+        "description": "Get details for a specific virtual card",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Card details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "card_id": {"type": "string"},
+                    "card_number": {"type": "string"},
+                    "expiry": {"type": "string"},
+                    "balance": {"type": "string"},
+                    "currency": {"type": "string"},
+                    "status": {"type": "string"}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/action/card/transaction/{id}": {
+      "get": {
+        "summary": "Perform card operations",
+        "description": "Top-up, withdraw, enable/disable, or get transactions for a card",
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "x-sp-auth-token",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "action",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["topup", "withdraw", "disabled", "enabled", "transactions", "terminate"]
+            }
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required for topup/withdraw"
+          },
+          {
+            "name": "amount",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Required for topup/withdraw"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operation successful",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "type": "object",
+                      "properties": {
+                        "new_balance": {"type": "string"},
+                        "transaction_id": {"type": "string"}
+                      },
+                      "description": "For topup/withdraw"
+                    },
+                    {
+                      "type": "object",
+                      "properties": {
+                        "status": {"type": "string"}
+                      },
+                      "description": "For enable/disable/terminate"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "date": {"type": "string"},
+                          "amount": {"type": "string"},
+                          "type": {"type": "string"}
+                        }
+                      },
+                      "description": "For transactions list"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
 
 
 

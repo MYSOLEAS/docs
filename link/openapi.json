@@ -309,15 +309,6 @@
     }
   }
 }
-
-
-
-
-
-
-
-
-
   },
   "webhooks": {
     "/plant/webhook": {

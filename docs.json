@@ -20,10 +20,24 @@
             ]
           },
           {
+            "group": " AUTH ENDPOINTS",
+            "pages": [
+              "api-reference/endpoint/getBearer"
+            ]
+          },
+          {
+            "group": " VIRTUAL CARDS ENDPOINTS",
+            "pages": [
+              "api-reference/endpoint/userCard",
+              "api-reference/endpoint/listUser",
+              "api-reference/endpoint/create",
+              "api-reference/endpoint/getDetails",
+              "api-reference/endpoint/cardTrans"
+            ]
+          },
+          {
             "group": "ENDPOINTS",
             "pages": [
-              "api-reference/endpoint/getBearer",
-              "api-reference/endpoint/getServices",
               "api-reference/endpoint/collectionPayment",
               "api-reference/endpoint/disbursePayment",
               "api-reference/endpoint/transfertFunds",
@@ -67,6 +81,23 @@
             "pages": [
               "sms/endpoint/apiKey",
               "sms/endpoint/sendSms"
+            ]
+          }
+        ]
+      },
+       {
+       "tab": "SOPAY BUTTON V3 Intergrattion",
+        "groups": [
+          {
+            "group": "GENERAL",
+            "pages": [
+              "button/introduction"
+            ]
+          },
+          {
+            "group": "ENDPOINTS",
+            "pages": [
+              "button/endpoint/init"
             ]
           }
         ]

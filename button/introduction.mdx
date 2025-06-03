@@ -1,0 +1,39 @@
+---
+title:  SOPAY BUTTON V3
+---
+
+import Reference from 'components/Reference.mdx'
+
+
+## I. Pré-requis
+
+### I.1 Compétences techniques
+
+L’installation de ce module est simple, mais nécessite des compétences de base en JavaScript et développement web.
+
+### I.2 Obtenir une APIKEY
+
+Avant toute intégration, vous devez :
+
+- Créer un compte **Marchand ou Professionnel** sur [SOLEASPAY](https://soleaspay.com)
+- Demander votre clé API (APIKEY) par email à : [support@mysoleas.com](mailto:support@mysoleas.com), en précisant **votre numéro de téléphone associé au compte**
+
+⚠️ Pour recevoir la clé API, vous devez :
+
+- Signer le contrat d'utilisation
+- Fournir un registre de commerce ou une pièce justificative valide
+
+---
+
+## II. Installation
+
+L’installation consiste à insérer **deux scripts** dans votre page HTML.
+
+### a. Script principal
+
+```html
+<!-- Environnement de production -->
+<script id="SBScript" type="text/javascript" data-lang="fr" data-apikey="VOTRE_API_KEY" src="https://soleaspay.com/webPay/v2/sopayButton.min.js"></script>
+
+<!-- Environnement de test -->
+<script id="SBScript" type="text/javascript" data-lang="fr" data-apikey="VOTRE_API_KEY" src="https://soleaspay.com/sandbox/sandboxButton.min.js"></script>

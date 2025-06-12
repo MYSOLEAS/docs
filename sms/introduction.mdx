@@ -1,32 +1,93 @@
 ---
 title: 'Introduction'
-description: 'SoSMS is an api allowing sending asynchronous sms to mobile numbers via a simple request call.'
+description: 'Ce doc est un manuel d’instegration de la version 3 du bouton paiement en ligne de
+SOLEASPAY dans un site de e-commerce, une application web/mobile ou meme une application
+desktop.
+Ce module permettra à vos clients de payer vos articles ou vos services directement en ligne.'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can contact
-  our team for more details.
+  L’installation de ce module est certes simple, mais nécessite néanmoins des compétences
+techniques de base en matière de développement de sites ou d’applications web notamment en
+Javascript.
 </Note>
 
-## API Base
+##  L’API KEY
 
-Our Endpoints support GET, POST Requests.
+Avant de commencer l’integrationtion, rassurez-vous d’avoir déjà créé un compte MARCHANT
+ou PROFESSIONNEL sur SOLEASPAY. Et d’avoir déjà reçu par mail votre clé d’access (APIKEY). Cette cle
+sera utilisée plus bas dans ce tutoriel.
+
+Si vous n’avez pas encore d’APIKEY, rédigez un simple mail adressé à (support@mysoleas.com).
+ Dans ce mail, vous demandez simplement que vous souhaitez avoir votre apiKey lié à votre compte, et
+précisez le numéro de téléphone et l’adresse email liés à votre compte. Vous la recevrez par la suite
+dans les heures ou minutes qui suivent.
 
 <Card
-  title="MYSOLEAS"
+  title="SOLEASPAY"
   icon="globe"
-  href="https://mysoleas.com"
+  href="https://soleaspay.com"
 >
-  View the website for specification details
+  Visite notre site pour plus de details 
 </Card>
 
-## Authentication
 
-SoSMS API required apikey for Authentication.
-Get your Apikey in your Dashboard to make sms APIs call
 
-## Rate Limits
+Attention, pour recevoir votre APIKEY, vous devrez avoir bouclé les formalités administratives :
+ Signature du contrat
+ Dépôt du registre de commerce pour votre entreprise ou toute autre pièce justificative,
+nécessaire aux opérateurs et administrations financières, en faveur de la lutte contre le
+blanchiment d’argent et la web-criminalité
 
-The number of request is limited to 120 requests per hour, per IP address. If you need a higher limit, please [contact us](https://mysoleas.com/#footer).  
-All IPs sending excessive requests will be down.
+
+###  Intégration
+
+L’installation du FORMULAIRE DE PAIEMENT SOLEASPAY se résume à la validation d’un
+formulaire html comme suit :
+
+```bash
+<form action="https://checkout.soleaspay.com" method="post" >
+<div class="form-group">
+<span>montant :</span>
+<input class="form-control" name="amount" type="number">
+</div>
+<div class="form-group">
+<span>currency :</span>
+<input class="form-control" name="currency" type="text">
+</div>
+<div class="form-group">
+<span>description :</span>
+<input class="form-control" name="description" type="text">
+</div>
+<div class="form-group">
+<span>order Id :</span>
+<input class="form-control" name="orderId" type="text">
+</div>
+<div class="form-group">
+<span>service :</span>
+<input class="form-control" name="service" type="number">
+</div>
+<div class="form-group">
+<span>customer :</span>
+<input class="form-control" name="customer[name]" type="text">
+<input class="form-control" name="customer[email]" type="text">
+</div>
+<div class="form-group">
+<span>success Url :</span>
+<input class="form-control" name="successUrl" type="url" value="url_de_success">
+</div>
+<div class="form-group">
+<span>faillure Url :</span>
+<input class="form-control" name="failureUrl" type="url" value="url_d’echec" >
+<input type="hidden" value="test shop" name="shopName"
+value="nom_commercial">
+<input class="form-control" name="apiKey" type="hidden" value="Votre_apikey">
+<input class="form-control" name="line" type="text" value="up" >
+</div>
+<div class="form-group mt-2">
+<button type="submit" class="btn btn-primary">Pay Now !</button>
+</div>
+</form>
+
+
 

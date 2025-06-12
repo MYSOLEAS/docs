@@ -48,27 +48,8 @@
           }
         ]
       },
-      {
-       "tab": "Link SoPay API Documentation",
-        "groups": [
-          {
-            "group": "GENERAL",
-            "pages": [
-              "link/introduction"
-            ]
-          },
-          {
-            "group": "ENDPOINTS",
-            "pages": [
-              "link/endpoint/initWallet",
-              "link/endpoint/initTrans",
-              "link/endpoint/fiat"
-            ]
-          }
-        ]
-      },
-      {
-       "tab": "SoSMS API Documentation",
+       {
+       "tab": "Checkout V3 Intergrattion",
         "groups": [
           {
             "group": "GENERAL",
@@ -79,8 +60,10 @@
           {
             "group": "ENDPOINTS",
             "pages": [
-              "sms/endpoint/apiKey",
-              "sms/endpoint/sendSms"
+              "sms/endpoint/check",
+              "sms/endpoint/checkout",
+              "sms/endpoint/verify",
+              "sms/endpoint/convert"
             ]
           }
         ]
@@ -101,7 +84,27 @@
             ]
           }
         ]
+      },
+      {
+       "tab": "Link SoPay API Documentation",
+        "groups": [
+          {
+            "group": "GENERAL",
+            "pages": [
+              "link/introduction"
+            ]
+          },
+          {
+            "group": "ENDPOINTS",
+            "pages": [
+              "link/endpoint/initWallet",
+              "link/endpoint/initTrans",
+              "link/endpoint/fiat"
+            ]
+          }
+        ]
       }
+     
     ],
     "global": {
       "anchors": [

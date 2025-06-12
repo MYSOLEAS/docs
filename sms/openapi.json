@@ -2,188 +2,189 @@
   "openapi": "3.1.0",
   "info": {
     "title": "SoleasPay API",
-    "description": "API to authenticate and receive a bearer token from SoleasPay",
+    "description": "API pour intégrer le paiement via formulaire, vérifier l’état d’une transaction, et convertir des devises en temps réel avec SoleasPay.",
+    "version": "1.0.0",
     "license": {
       "name": "MIT"
-    },
-    "version": "1.0.0"
+    }
   },
   "servers": [
     {
-      "url": "mysoleas.com"
+      "url": "https://soleaspay.com"
     }
   ],
+  "paths": {
+    "/checkout": {
+      "post": {
+        "operationId": "submitPaymentForm",
+        "summary": "Soumettre un formulaire de paiement",
+        "tags": ["Paiement"],
+        "description": "Redirige l'utilisateur vers le formulaire de paiement pour finaliser l'opération.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apiKey": { "type": "string", "description": "Clé API du compte professionnel" },
+                  "shopName": { "type": "string" },
+                  "amount": { "type": "number" },
+                  "currency": { "type": "string" },
+                  "description": { "type": "string" },
+                  "orderId": { "type": "string" },
+                  "service": { "type": "string", "nullable": true },
+                  "customer[name]": { "type": "string" },
+                  "customer[email]": { "type": "string", "format": "email" },
+                  "line": { "type": "string", "enum": ["UP"], "nullable": true },
+                  "successUrl": { "type": "string", "format": "uri" },
+                  "failureUrl": { "type": "string", "format": "uri" }
+                },
+                "required": ["apiKey", "shopName", "amount", "currency", "description", "orderId", "customer[name]", "customer[email]", "successUrl", "failureUrl"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "302": {
+            "description": "Redirection vers la page de paiement de SoleasPay"
+          }
+        }
+      }
+    },
+    "/checkout?mode=api": {
+      "post": {
+        "operationId": "generatePaymentLink",
+        "summary": "Générer un lien de paiement",
+        "tags": ["Paiement"],
+        "description": "Retourne un lien de paiement redirigeable pour un paiement ultérieur.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/paths/~1checkout/post/requestBody/content/application~1x-www-form-urlencoded/schema"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Lien de paiement généré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "url": { "type": "string", "format": "uri" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/agent/verif-pay": {
+      "get": {
+        "operationId": "verifyPayment",
+        "summary": "Vérifier le statut d'une transaction",
+        "tags": ["Paiement"],
+        "parameters": [
+          {
+            "name": "payid",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Référence interne (payId) générée par SoleasPay"
+          },
+          {
+            "name": "x-api-key",
+            "in": "header",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "Clé API pour l'authentification"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Statut de la transaction",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/convert": {
+      "get": {
+        "operationId": "convertCurrency",
+        "summary": "Convertir des devises",
+        "tags": ["Conversion"],
+        "parameters": [
+          {
+            "name": "amount",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "number" }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "default": "SPC" },
+            "description": "Devise de sortie ou 'ALL' pour toutes les conversions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Résultat de la conversion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "number"
+                  },
+                  "example": {
+                    "USD": 1.08,
+                    "XAF": 650.5
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
   "security": [
     {
       "bearerAuth": []
     }
-  ],
-  "paths": {
-"/v2/sms/refresh-apikey": {
-  "get": {
-    "summary": "Refresh API Key",
-    "description": "Refresh your current API key used for sending SMS.",
-    "tags": ["Authentication", "SMS"],
-    "parameters": [
-      {
-        "name": "key",
-        "in": "query",
-        "required": true,
-        "description": "Your current API key.",
-        "schema": {
-          "type": "string",
-          "example": "your-apikey"
-        }
-      },
-      {
-        "name": "Content-Type",
-        "in": "header",
-        "required": true,
-        "schema": {
-          "type": "string",
-          "default": "application/json"
-        }
-      }
-    ],
-    "responses": {
-      "200": {
-        "description": "API key refreshed successfully.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "apikey refresh"
-                },
-                "apikey": {
-                  "type": "string",
-                  "example": "Your new apikey"
-                }
-              }
-            }
-          }
-        }
-      },
-      "400": {
-        "description": "Failed to refresh the API key.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Error message"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "x-codeSamples": [
-      {
-        "lang": "JavaScript",
-        "label": "JavaScript Fetch",
-        "source": "var myHeaders = new Headers();\nmyHeaders.append(\"Content-Type\", \"application/json\");\n\nvar requestOptions = {\n  method: 'GET',\n  headers: myHeaders,\n  redirect: 'follow'\n};\n\nfetch(\"https://mysoleas.com/v2/sms/refresh-apikey?key=your-apikey\", requestOptions)\n  .then(response => response.text())\n  .then(result => console.log(result))\n  .catch(error => console.log('error', error));"
-      }
-    ]
-  }
-}
-,
-"/v2/sms/add": {
-  "post": {
-    "summary": "Send SMS",
-    "description": "Add a message to the SMS queue for delivery.",
-    "tags": ["SMS"],
-    "requestBody": {
-      "required": true,
-      "content": {
-        "application/x-www-form-urlencoded": {
-          "schema": {
-            "type": "object",
-            "properties": {
-              "key": {
-                "type": "string",
-                "description": "Your API key.",
-                "example": "your Apikey"
-              },
-              "contact": {
-                "type": "integer",
-                "description": "Receiver's phone number.",
-                "example": 698618200
-              },
-              "message": {
-                "type": "string",
-                "description": "Text message to send (max 160 characters).",
-                "example": "message to send (160 length)"
-              }
-            },
-            "required": ["key", "contact", "message"]
-          }
-        }
-      }
-    },
-    "responses": {
-      "200": {
-        "description": "Message successfully queued for sending.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Message save to send list"
-                }
-              }
-            }
-          }
-        }
-      },
-      "400": {
-        "description": "Error while queuing the message.",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "success": {
-                  "type": "boolean",
-                  "example": false
-                },
-                "message": {
-                  "type": "string",
-                  "example": "Error message"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "x-codeSamples": [
-      {
-        "lang": "JavaScript",
-        "label": "JavaScript Fetch",
-        "source": "var myHeaders = new Headers();\nmyHeaders.append(\"Content-Type\", \"application/x-www-form-urlencoded\");\n\nvar urlencoded = new URLSearchParams();\nurlencoded.append(\"contact\", \"698618200\");\nurlencoded.append(\"key\", \"your Apikey\");\nurlencoded.append(\"message\", \"message to send (160 length)\");\n\nvar requestOptions = {\n  method: 'POST',\n  headers: myHeaders,\n  body: urlencoded,\n  redirect: 'follow'\n};\n\nfetch(\"https://mysoleas.com/v2/sms/add\", requestOptions)\n  .then(response => response.text())\n  .then(result => console.log(result))\n  .catch(error => console.log('error', error));"
-      }
-    ]
-  }
-}
-  }
+  ]
 }

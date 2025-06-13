@@ -40,10 +40,7 @@
             "pages": [
               "api-reference/endpoint/collectionPayment",
               "api-reference/endpoint/disbursePayment",
-              "api-reference/endpoint/transfertFunds",
-              "api-reference/endpoint/verifyTransaction",
-              "api-reference/endpoint/transactionDetails",
-              "api-reference/endpoint/converter"
+              "api-reference/endpoint/verifyTransaction"
             ]
           },
           {
@@ -53,6 +50,12 @@
               "link/endpoint/initWallet",
               "link/endpoint/initTrans",
               "link/endpoint/fiat"
+            ]
+          },
+          {
+            "group": "Utils",
+            "pages": [
+              "api-reference/endpoint/converter"
             ]
           }
         ]

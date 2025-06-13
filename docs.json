@@ -11,7 +11,7 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "SoleasPay API Documentation",
+        "tab": "SoleasPay API",
         "groups": [
           {
             "group": "GENERAL",
@@ -26,7 +26,7 @@
             ]
           },
           {
-            "group": " VIRTUAL CARDS ENDPOINTS",
+            "group": " Virtual Cards",
             "pages": [
               "api-reference/endpoint/userCard",
               "api-reference/endpoint/listUser",
@@ -36,7 +36,7 @@
             ]
           },
           {
-            "group": "ENDPOINTS",
+            "group": "Payments",
             "pages": [
               "api-reference/endpoint/collectionPayment",
               "api-reference/endpoint/disbursePayment",
@@ -45,31 +45,40 @@
               "api-reference/endpoint/transactionDetails",
               "api-reference/endpoint/converter"
             ]
+          },
+          {
+            "group": "SoConnect",
+            "pages": [
+              "link/introduction",
+              "link/endpoint/initWallet",
+              "link/endpoint/initTrans",
+              "link/endpoint/fiat"
+            ]
           }
         ]
       },
        {
-       "tab": "Checkout V3 Intergrattion",
+       "tab": "SoleasPay Checkout",
         "groups": [
           {
             "group": "GENERAL",
             "pages": [
-              "sms/introduction"
+              "checkout/introduction"
             ]
           },
           {
             "group": "ENDPOINTS",
             "pages": [
-              "sms/endpoint/check",
-              "sms/endpoint/checkout",
-              "sms/endpoint/verify",
-              "sms/endpoint/convert"
+              "checkout/endpoint/check",
+              "checkout/endpoint/checkout",
+              "checkout/endpoint/verify",
+              "checkout/endpoint/convert"
             ]
           }
         ]
       },
        {
-       "tab": "SOPAY BUTTON V3 Intergrattion",
+       "tab": "SoleasPay Button",
         "groups": [
           {
             "group": "GENERAL",
@@ -84,25 +93,6 @@
             ]
           }
         ]
-      },
-      {
-       "tab": "Link SoPay API Documentation",
-        "groups": [
-          {
-            "group": "GENERAL",
-            "pages": [
-              "link/introduction"
-            ]
-          },
-          {
-            "group": "ENDPOINTS",
-            "pages": [
-              "link/endpoint/initWallet",
-              "link/endpoint/initTrans",
-              "link/endpoint/fiat"
-            ]
-          }
-        ]
       }
      
     ],
@@ -110,7 +100,7 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://soleapay.com/docs",
+          "href": "https://doc.soleapay.com",
           "icon": "book-open-cover"
         },
         {

@@ -1,46 +1,34 @@
 ---
-title: 'Introduction'
-description: 'Ce doc est un manuel d’instegration de la version 3 du bouton paiement en ligne de
-SOLEASPAY dans un site de e-commerce, une application web/mobile ou meme une application
-desktop.
-Ce module permettra à vos clients de payer vos articles ou vos services directement en ligne.'
+title: "Introduction"
+description: "Ce doc est un manuel d’instegration de la version 2 du formulaire de paiement en ligne de SOLEASPAY dans un site de e-commerce, une page de vente, une application web/mobile ou meme une application desktop. Ce module permettra à vos clients de payer vos articles ou vos services directement en ligne via toutes les methodes de paiements disponible sur SoleasPay."
 ---
 
 <Note>
   L’installation de ce module est certes simple, mais nécessite néanmoins des compétences
-techniques de base en matière de développement de sites ou d’applications web notamment en
-Javascript.
+  techniques de base en matière de développement de sites ou d’applications web notamment en
+  Javascript.
 </Note>
 
-##  L’API KEY
+## L’API KEY
 
-Avant de commencer l’integrationtion, rassurez-vous d’avoir déjà créé un compte MARCHANT
-ou PROFESSIONNEL sur SOLEASPAY. Et d’avoir déjà reçu par mail votre clé d’access (APIKEY). Cette cle
-sera utilisée plus bas dans ce tutoriel.
+Avant de commencer l’integrationtion, rassurez-vous d’avoir déjà créé un compte MARCHANT ou PROFESSIONNEL sur SoleasPay et d’avoir déjà reçu par mail votre clé d’access (APIKEY). Cette cle sera utilisée plus bas dans ce tutoriel.
 
-Si vous n’avez pas encore d’APIKEY, rédigez un simple mail adressé à (support@mysoleas.com).
- Dans ce mail, vous demandez simplement que vous souhaitez avoir votre apiKey lié à votre compte, et
+Si vous n’avez pas encore d’APIKEY, rédigez un simple mail adressé à ([support@mysoleas.com](mailto:support@mysoleas.com)).
+Dans ce mail, vous demandez simplement que vous souhaitez avoir votre apiKey lié à votre compte, et
 précisez le numéro de téléphone et l’adresse email liés à votre compte. Vous la recevrez par la suite
 dans les heures ou minutes qui suivent.
 
-<Card
-  title="SOLEASPAY"
-  icon="globe"
-  href="https://soleaspay.com"
->
-  Visite notre site pour plus de details 
+<Card title="SOLEASPAY" icon="globe" href="https://soleaspay.com">
+  Visite notre site pour plus de details
 </Card>
 
-
-
 Attention, pour recevoir votre APIKEY, vous devrez avoir bouclé les formalités administratives :
- Signature du contrat
- Dépôt du registre de commerce pour votre entreprise ou toute autre pièce justificative,
+Signature du contrat
+Dépôt du registre de commerce pour votre entreprise ou toute autre pièce justificative,
 nécessaire aux opérateurs et administrations financières, en faveur de la lutte contre le
 blanchiment d’argent et la web-criminalité
 
-
-###  Intégration
+### Intégration
 
 L’installation du FORMULAIRE DE PAIEMENT SOLEASPAY se résume à la validation d’un
 formulaire html comme suit :
@@ -90,4 +78,4 @@ value="nom_commercial">
 </form>
 
 
-
+```

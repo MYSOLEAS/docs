@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "aspen",
+  "theme": "willow",
   "name": "Soleaspay",
   "colors": {
     "primary": "#16A34A",

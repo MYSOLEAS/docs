@@ -1,7 +1,6 @@
 ---
 title: "Checkout Integration"
-description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications. 
-This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
+description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications.  This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
 ---
 
 <Note>
@@ -35,7 +34,7 @@ You should receive it within hours or minutes.
 
 ## Integration
 
-Installing the SOLEASPAY PAYMENT FORM involves implementing an HTML form as follows:
+Installing the SoleasPay Checkout involves implementing an HTML form as follows:
 
 ### <a id="verify-trans" />
 
@@ -81,6 +80,7 @@ Convert an amount from one currency to another using ISO 4217 codes. If the ‘t
     <span>Customer Details:</span>
     <input class="form-control" name="customer[name]" type="text" placeholder="Full name" required>
     <input class="form-control" name="customer[email]" type="email" placeholder="Email" required>
+	<input class="form-control" name="customer[wallet]" type="tel" placeholder="Phone" required>
   </div>
   
   <div class="form-group">

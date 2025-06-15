@@ -8,12 +8,12 @@ When creating an account with SoleasPay, you will first receive access to our sa
 
 The base URL for the SoleasPay Merchant API is different between our sandbox and production environments:
 
-| Environment | Base URL |
-|-------------|----------|
-| Sandbox     | [http://sandbox.soleaspay.com](http://sandbox.soleaspay.com) |
-| Production  | [https://soleaspay.com/home/](https://soleaspay.com/home/) |
+| Environment | Base URL                                             |
+| ----------- | ---------------------------------------------------- |
+| Sandbox     | http://sandbox.soleaspay.com                         |
+| Production  | [https://soleaspay.com](https://soleaspay.com/home/) |
 
-The specific operation can be called by appending the endpoint to the base URL. Example: `http://sandbox.soleaspay.com/payouts`
+The specific operation can be called by appending the endpoint to the base URL. Example: `http://sandbox.soleaspay.com`
 
 ## Authentication
 
@@ -35,3 +35,4 @@ curl -i -X POST \
     "customerTimestamp": "2020-02-21T17:32:28Z",
     "statementDescription": "Payment description"
   }'
+```

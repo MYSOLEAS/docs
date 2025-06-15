@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
-  "name": "Soleaspay",
+  "theme": "willow",
+  "name": "SoleasPay",
   "colors": {
     "primary": "#16A34A",
     "light": "#07C983",
@@ -107,7 +107,7 @@
       "anchors": [
         {
           "anchor": "Documentation",
-          "href": "https://doc.soleapay.com",
+          "href": "https://doc.soleaspay.com",
           "icon": "book-open-cover"
         },
         {

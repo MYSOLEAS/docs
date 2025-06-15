@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "mint",
+  "theme": "aspen",
   "name": "Soleaspay",
   "colors": {
     "primary": "#16A34A",
@@ -29,8 +29,8 @@
                "api-docs/Checkout Integration",
                "api-docs/Button Integration",
                "api-docs/Links",
-                "api-docs/Deposite",
-                "api-docs/PayOut"
+                "api-docs/Collection",
+                "api-docs/Disbursement"
             ]
           }
         ]
@@ -112,12 +112,12 @@
         },
         {
           "anchor": "Community",
-          "href": "https://mintlify.com/community",
+          "href": "https://t.me/soleaspay",
           "icon": "slack"
         },
         {
           "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "href": "https://soleaspay.com/home/blog",
           "icon": "newspaper"
         }
       ]
@@ -137,12 +137,12 @@
     "primary": {
       "type": "button",
       "label": "Dashboard",
-      "href": "https://soleaspay.com/home/"
+      "href": "https://app.soleaspay.com/auth/login"
     }
   },
   "footer": {
     "socials": {
-     "website": "https://soleaspay.com/home/",
+     "website": "https://soleaspay.com",
       "github": "https://github.com/MYSOLEAS",
       "linkedin": "https://cm.linkedin.com/company/mysoleas"
     }

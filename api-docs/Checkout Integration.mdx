@@ -1,6 +1,7 @@
 ---
 title: "Checkout Integration"
-description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications. This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
+description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications. 
+This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
 ---
 
 <Note>
@@ -10,10 +11,12 @@ description: "This document is an integration manual for version 2 of SOLEASPAY'
 ## The API KEY
 
 Before beginning integration, ensure you have already:
+
 1. Created a MERCHANT or PROFESSIONAL account on [SOLEASPAY](https://soleaspay.com)
 2. Received your access key (APIKEY) via email
 
 If you don't have an APIKEY yet, send a simple email to ([support@mysoleas.com](mailto:support@mysoleas.com)) with:
+
 - Your request for an API key
 - The phone number and email associated with your account
 
@@ -24,24 +27,28 @@ You should receive it within hours or minutes.
 </Card>
 
 <Warning>
-To receive your APIKEY, you must complete administrative formalities:
-- Signed contract
-- Business registration documents or any other required documentation for financial operators and administrations, as part of anti-money laundering and cybercrime prevention measures
+  To receive your APIKEY, you must complete administrative formalities:
+
+  - Signed contract
+  - Business registration documents or any other required documentation for financial operators and administrations, as part of anti-money laundering and cybercrime prevention measures
 </Warning>
 
 ## Integration
 
 Installing the SOLEASPAY PAYMENT FORM involves implementing an HTML form as follows:
 
-### <a id="verify-trans"></a>[Verify Pay](https://doc.soleaspay.com/api-reference/endpoint/verifyTransaction) 
+### <a id="verify-trans" />
+
+[Verify Pay](https://doc.soleaspay.com/api-reference/endpoint/verifyTransaction)
 
 Use this endpoint to check payment status:
 Check if the payment is validated by the customer using the unique order ID and the SoleasPay payment reference (payId). Requires x-api-key and optional headers like operation and service.
 
+### <a id="verify-pay-endpoint" />
 
-### <a id="verify-pay-endpoint"></a>[Convert](https://doc.soleaspay.com/api-reference/endpoint/converter) 
+[Convert](https://doc.soleaspay.com/api-reference/endpoint/converter)
+
 Convert an amount from one currency to another using ISO 4217 codes. If the ‘to’ parameter is omitted, conversion is performed to all supported currencies.
-
 
 ```html
 <form action="https://checkout.soleaspay.com" method="post">
@@ -95,4 +102,4 @@ Convert an amount from one currency to another using ISO 4217 codes. If the ‘t
     <button type="submit" class="btn btn-primary">Pay Now</button>
   </div>
 </form>
-
+```

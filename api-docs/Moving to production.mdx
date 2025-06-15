@@ -1,14 +1,14 @@
-
 ---
+
 When transitioning from sandbox to **production**, ensure your integration is updated with the following changes:
 
 ## ✅ Key Differences Between Environments
 
-| Parameter            | Sandbox                             | Production                             |
-|----------------------|--------------------------------------|----------------------------------------|
-| **Base URL**         | `http://sandbox.soleaspay.com`      | `https://soleaspay.com/home/`          |
-| **Token**            | Sandbox Bearer Token                | Production Bearer Token                 |
-| **MMO Environment**  | Simulated Transactions              | Live Mobile Wallet Transactions         |
+| Parameter           | Sandbox                        | Production                      |
+| ------------------- | ------------------------------ | ------------------------------- |
+| **Base URL**        | `http://sandbox.soleaspay.com` | `https://soleaspay.com`         |
+| **Token**           | Sandbox Bearer Token           | Production Bearer Token         |
+| **MMO Environment** | Simulated Transactions         | Live Mobile Wallet Transactions |
 
 > 🧠 **Tip**: Store environment configs in `.env` files or a secrets manager (e.g., `.env.production` vs `.env.development`).
 
@@ -20,7 +20,7 @@ If your production system uses **IP whitelisting**, don’t forget to whitelist 
 
 ---
 
-#  Go-Live Testing (Pre-Launch Checklist)
+# Go-Live Testing (Pre-Launch Checklist)
 
 Before releasing to customers, perform a **live transaction test** with each MMO you plan to support.
 
@@ -45,13 +45,14 @@ We recommend toggling a **feature flag** (e.g. `USE_SOLEASPAY_LIVE = true`) in y
 
 ```bash
 curl --request POST \
-  --url https://soleaspay.com/home/api/action/account/withdraw \
+  --url https://soleaspay.com/api/action/account/withdraw \
   --header 'Authorization: Bearer <PRODUCTION_TOKEN>' \
-  --header 'operation: payout' \
-  --header 'service: MTN_MOMO_CMR' \
+  --header 'operation: 4' \
+  --header 'service: 1' \
   --header 'Content-Type: application/json' \
   --data '{
   "wallet": "677XXXXXX",
   "amount": 500,
   "currency": "XAF"
 }'
+```

@@ -1,0 +1,101 @@
+---
+title: "Getting Started "
+---
+
+<Note>
+  Installing this module is straightforward but requires basic technical skills in web or app development, especially in JavaScript.
+</Note>
+
+## Integration Steps
+
+Here’s how to get started with the **Soleaspay Sandbox**:
+
+### 1. Fork the API Collection
+
+Visit our [Soleaspay Sandbox](http://sandbox.soleaspay.com) and fork the API collection to your workspace in your preferred API testing tool.
+
+### 2. Set Up a Mock Server (Optional)
+
+If you don’t need callbacks, you can skip this step or come back to it later.
+
+To create a mock server:
+- Go to **Mock Servers** in your testing tool.
+- Click the “+” button.
+- Choose “Select an existing collection”.
+- Select the **Soleaspay Merchant API**.
+- Name your server (e.g., "Soleaspay Sandbox").
+- Click **Create Mock Server** and copy the mock server URL.
+
+### 3. Create a Soleaspay Sandbox Account
+
+If you haven’t already, create a free account in the [Soleaspay Sandbox](http://sandbox.soleaspay.com). It takes only a few minutes and allows you to test the API immediately.
+
+### 4. Set Up Callbacks (Optional)
+
+If your flows require callbacks:
+- Log in to the sandbox dashboard.
+- Navigate to **System Configuration > Callback URLs**.
+- Click “Edit” and paste the URL you copied earlier.
+- Click “Save Changes”.
+
+### 5. Generate Your API Token
+
+Go to **System Configuration > API Tokens** in the sandbox dashboard, and generate a new API token.
+
+⚠️ Store this token immediately — **Soleaspay does not store your tokens for security reasons.**
+
+### 6. Set Up a Sandbox Environment
+
+In your API testing tool:
+- Go to **Environments** and click the “+” button.
+- Name the environment (e.g., "Soleaspay Sandbox").
+- Add the following variables:
+
+| Variable   | Value                             |
+|------------|-----------------------------------|
+| `apiToken` | Paste the token you generated     |
+| `baseUrl`  | `https://api.sandbox.soleaspay.com` |
+
+Save the environment and select it from the top-right dropdown.
+
+### 7. You're All Set!
+
+You can now start sending requests to the Soleaspay API in the sandbox environment.
+
+We recommend starting with `Request deposit`, then exploring the following:
+
+
+<CardGroup>
+
+<Card title="Deposits" icon="file" href="https://doc.soleaspay.com/api-docs/Deposite">
+  Learn how to receive payments.
+</Card>
+
+<Card
+  title="Payouts"
+  icon="square-code"
+  href="https://doc.soleaspay.com/api-docs/PayOut"
+>
+  Learn how to send payments.
+</Card>
+
+<Card
+  title="Refunds"
+  icon="image"
+  href="https://doc.soleaspay.com/api-docs/Refund"
+>
+ Learn how to refund transactions.
+</Card>
+
+<Card
+  title="Configuration"
+  icon="puzzle-piece"
+  href="#"
+>
+ Retrieve your setup and all required parameters.
+</Card>
+
+</CardGroup>
+
+Explore the full API documentation in the [Soleaspay Sandbox](http://sandbox.soleaspay.com) for more.
+

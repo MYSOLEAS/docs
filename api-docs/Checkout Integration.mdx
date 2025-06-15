@@ -1,0 +1,98 @@
+---
+title: "Checkout Integration"
+description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications. This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
+---
+
+<Note>
+  While the installation of this module is straightforward, it does require basic technical skills in website or web application development, particularly in JavaScript.
+</Note>
+
+## The API KEY
+
+Before beginning integration, ensure you have already:
+1. Created a MERCHANT or PROFESSIONAL account on [SOLEASPAY](https://soleaspay.com)
+2. Received your access key (APIKEY) via email
+
+If you don't have an APIKEY yet, send a simple email to ([support@mysoleas.com](mailto:support@mysoleas.com)) with:
+- Your request for an API key
+- The phone number and email associated with your account
+
+You should receive it within hours or minutes.
+
+<Card title="SOLEASPAY" icon="globe" href="https://soleaspay.com">
+  Visit our website for more details
+</Card>
+
+<Warning>
+To receive your APIKEY, you must complete administrative formalities:
+- Signed contract
+- Business registration documents or any other required documentation for financial operators and administrations, as part of anti-money laundering and cybercrime prevention measures
+</Warning>
+
+## Integration
+
+Installing the SOLEASPAY PAYMENT FORM involves implementing an HTML form as follows:
+
+### <a id="verify-trans"></a>[Verify Pay](https://doc.soleaspay.com/api-reference/endpoint/verifyTransaction) 
+
+Use this endpoint to check payment status:
+Check if the payment is validated by the customer using the unique order ID and the SoleasPay payment reference (payId). Requires x-api-key and optional headers like operation and service.
+
+
+### <a id="verify-pay-endpoint"></a>[Convert](https://doc.soleaspay.com/api-reference/endpoint/converter) 
+Convert an amount from one currency to another using ISO 4217 codes. If the ‘to’ parameter is omitted, conversion is performed to all supported currencies.
+
+
+```html
+<form action="https://checkout.soleaspay.com" method="post">
+  <div class="form-group">
+    <span>Amount:</span>
+    <input class="form-control" name="amount" type="number" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Currency:</span>
+    <input class="form-control" name="currency" type="text" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Description:</span>
+    <input class="form-control" name="description" type="text" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Order ID:</span>
+    <input class="form-control" name="orderId" type="text" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Service:</span>
+    <input class="form-control" name="service" type="number" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Customer Details:</span>
+    <input class="form-control" name="customer[name]" type="text" placeholder="Full name" required>
+    <input class="form-control" name="customer[email]" type="email" placeholder="Email" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Success URL:</span>
+    <input class="form-control" name="successUrl" type="url" value="your_success_url" required>
+  </div>
+  
+  <div class="form-group">
+    <span>Failure URL:</span>
+    <input class="form-control" name="failureUrl" type="url" value="your_failure_url" required>
+  </div>
+  
+  <!-- Hidden fields -->
+  <input type="hidden" name="shopName" value="your_business_name">
+  <input type="hidden" name="apiKey" value="YOUR_API_KEY">
+  <input type="hidden" name="line" value="up">
+  
+  <div class="form-group mt-2">
+    <button type="submit" class="btn btn-primary">Pay Now</button>
+  </div>
+</form>
+

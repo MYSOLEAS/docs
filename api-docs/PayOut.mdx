@@ -1,0 +1,82 @@
+---
+title: Payouts
+---
+
+##  Payouts (Withdrawal)
+
+You can disburse funds from your **SoleasPay account** to a **customer’s mobile money wallet**.
+
+✅ This operation **does not require customer PIN authorization** and is usually processed within **seconds**.
+
+---
+
+## 🔁 Payout Flow
+
+1. You submit a **payout request** to SoleasPay.
+2. SoleasPay forwards the request to the **Mobile Money Operator (MMO)**.
+3. The MMO processes the transaction and informs SoleasPay.
+4. SoleasPay notifies your backend via:
+   - A **callback URL** (if configured), or
+   - You can **manually check** the payout status using the `Check Payout Status` endpoint.
+
+---
+
+## 🔔 Callback Notification
+
+If you’ve configured a **callback URL**, SoleasPay will notify you of the final transaction status using a **Payout Status Callback**.
+
+> If not, use the **Check Payout Status endpoint** to poll the status.
+
+---
+
+## 📌 Payout Status Lifecycle
+
+After your payout request is submitted, it may transition through the following statuses:
+
+| Status      | Description                                                                  |
+|-------------|------------------------------------------------------------------------------|
+| `PROCESSING`  | The payout request has been accepted by SoleasPay for processing.              |
+| `SUCCESS` | The payout was successful. ✅ **Final State**                                 |
+| `FAILLURE`    | The payout failed. ❌ **Final State**                                          |
+
+---
+<img src="../images/payout.png" alt="Deposit Status Flow" style={{ marginTop: '1rem', maxWidth: '100%' }} />
+---
+## 📦 Enqueued Payouts
+
+When an **MMO is temporarily unavailable or experiencing issues**, payouts may not be processed immediately.
+
+In these cases:
+
+- The payout is still **accepted by SoleasPay**, but marked as `ENQUEUED`.
+- The request is **automatically processed later** when the MMO is back online.
+
+### 🛑 Cancelling Enqueued Payouts
+
+You can cancel an enqueued payout if it hasn't yet been submitted:
+
+- Use the `Cancel Enqueued Payout` API endpoint.
+- Or cancel directly from the **SoleasPay Dashboard**.
+
+---
+
+## 📡 MMO Availability
+
+Our Payment Operations team monitors MMO availability **24/7**. You can:
+
+- View the **real-time status** on the [SoleasPay Status Page](https://soleaspay.com)
+- Access MMO stability programmatically via the **Availability Endpoint**
+
+> Use this to avoid initiating payouts during MMO downtime.
+
+---
+
+## ⚙️ Implementation Tip
+
+Ensure your integration:
+- Handles all **status transitions** appropriately.
+- Supports **callback or polling** to track payout status.
+- Implements retry or cancellation logic for `ENQUEUED` payouts.
+
+
+For more details visite  [payout api-reference](https://doc.soleaspay.com/api-reference/endpoint/disbursePayment). 

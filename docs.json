@@ -10,15 +10,34 @@
   "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
-      {
-        "tab": "SoleasPay API",
+      
+       {
+       "tab": "API docs",
         "groups": [
           {
-            "group": "GENERAL",
+            "group": "Introduction",
             "pages": [
-              "api-reference/introduction"
+              "api-docs/Getting started",
+              "api-docs/mobile Money",
+              "api-docs/Using the API",
+              "api-docs/Moving to production"
             ]
           },
+           {
+            "group": "Learn about",
+            "pages": [
+               "api-docs/Checkout Integration",
+               "api-docs/Button Integration",
+               "api-docs/Links",
+                "api-docs/Deposite",
+                "api-docs/PayOut"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
           {
             "group": " AUTH ENDPOINTS",
             "pages": [
@@ -61,38 +80,23 @@
         ]
       },
        {
-       "tab": "SoleasPay Checkout",
+       "tab": "Dashboard Docs",
         "groups": [
           {
-            "group": "GENERAL",
+            "group": "Overview",
             "pages": [
-              "checkout/introduction"
+              "dashboard-doc/introduction",
+               "dashboard-doc/sigin",
+               "dashboard-doc/search",
+               "dashboard-doc/contact",
+                "dashboard-doc/wallet",
+                 "dashboard-doc/history"
             ]
           },
           {
-            "group": "ENDPOINTS",
+            "group": "Finances",
             "pages": [
-              "checkout/endpoint/check",
-              "checkout/endpoint/checkout",
-              "checkout/endpoint/verify",
-              "checkout/endpoint/convert"
-            ]
-          }
-        ]
-      },
-       {
-       "tab": "SoleasPay Button",
-        "groups": [
-          {
-            "group": "GENERAL",
-            "pages": [
-              "button/introduction"
-            ]
-          },
-          {
-            "group": "ENDPOINTS",
-            "pages": [
-              "button/endpoint/init"
+             
             ]
           }
         ]
@@ -138,7 +142,7 @@
   },
   "footer": {
     "socials": {
-      "x": "https://x.com/mintlify",
+     "website": "https://soleaspay.com/home/",
       "github": "https://github.com/MYSOLEAS",
       "linkedin": "https://cm.linkedin.com/company/mysoleas"
     }

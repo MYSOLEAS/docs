@@ -1,0 +1,57 @@
+
+---
+When transitioning from sandbox to **production**, ensure your integration is updated with the following changes:
+
+## ✅ Key Differences Between Environments
+
+| Parameter            | Sandbox                             | Production                             |
+|----------------------|--------------------------------------|----------------------------------------|
+| **Base URL**         | `http://sandbox.soleaspay.com`      | `https://soleaspay.com/home/`          |
+| **Token**            | Sandbox Bearer Token                | Production Bearer Token                 |
+| **MMO Environment**  | Simulated Transactions              | Live Mobile Wallet Transactions         |
+
+> 🧠 **Tip**: Store environment configs in `.env` files or a secrets manager (e.g., `.env.production` vs `.env.development`).
+
+---
+
+## 🔐 IP Whitelisting (Optional)
+
+If your production system uses **IP whitelisting**, don’t forget to whitelist SoleasPay’s callback IPs, or **your server won’t receive status updates** for transactions.
+
+---
+
+#  Go-Live Testing (Pre-Launch Checklist)
+
+Before releasing to customers, perform a **live transaction test** with each MMO you plan to support.
+
+We recommend toggling a **feature flag** (e.g. `USE_SOLEASPAY_LIVE = true`) in your code for switching to live tests without affecting all traffic.
+
+## 📋 What You'll Need:
+
+1. 📱 A **real phone number** subscribed to the desired MMO.
+2. 💳 An **active mobile money wallet** on that number.
+3. 💰 **Sufficient funds** in that wallet.
+4. 🔐 Be ready to **enter the wallet PIN** within **1–60 seconds** of initiating a transaction.
+
+## ✅ Why Go-Live Testing Is Important
+
+- Ensures your app handles **real-time mobile prompts** (PIN, confirmations).
+- Validates that **callbacks** are correctly received and processed.
+- Detects any production-specific issues **before** customers do.
+
+---
+
+## Example Test Flow
+
+```bash
+curl --request POST \
+  --url https://soleaspay.com/home/api/action/account/withdraw \
+  --header 'Authorization: Bearer <PRODUCTION_TOKEN>' \
+  --header 'operation: payout' \
+  --header 'service: MTN_MOMO_CMR' \
+  --header 'Content-Type: application/json' \
+  --data '{
+  "wallet": "677XXXXXX",
+  "amount": 500,
+  "currency": "XAF"
+}'

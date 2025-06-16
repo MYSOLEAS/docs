@@ -17,17 +17,17 @@
           {
             "group": "Introduction",
             "pages": [
-              "api-docs/Getting started",
-              "api-docs/mobile Money",
-              "api-docs/Using the API",
-              "api-docs/Moving to production"
+              "api-docs/Getting-started",
+              "api-docs/mobile-Money",
+              "api-docs/Using-the-API",
+              "api-docs/Moving-to-production"
             ]
           },
            {
             "group": "Learn about",
             "pages": [
-               "api-docs/Checkout Integration",
-               "api-docs/Button Integration",
+               "api-docs/Checkout-Integration",
+               "api-docs/Button-Integration",
                "api-docs/Links",
                 "api-docs/Collection",
                 "api-docs/Disbursement"
@@ -106,8 +106,8 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://doc.soleaspay.com",
+          "anchor": "About Company",
+          "href": "https://mysoleas.com",
           "icon": "book-open-cover"
         },
         {

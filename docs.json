@@ -26,11 +26,17 @@
            {
             "group": "Learn about",
             "pages": [
-               "api-docs/Checkout-Integration",
-               "api-docs/Button-Integration",
-               "api-docs/Links",
+               
                 "api-docs/Collection",
-                "api-docs/Disbursement"
+                "api-docs/Disbursement",
+                {
+                  "group": "Payment widgets",
+                  "pages": [
+                     "api-docs/Checkout-Integration",
+                     "api-docs/Button-Integration"   
+                  ]
+                },
+              "api-docs/Links"
             ]
           }
         ]

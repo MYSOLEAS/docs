@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://sandbox.soleaspay.com"
+      "url": "https://sandbox.soleaspay.com"
     }
   ],
   "security": [

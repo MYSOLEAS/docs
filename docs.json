@@ -18,7 +18,8 @@
             "group": "Introduction",
             "pages": [
               "api-docs/Getting-started",
-              "api-docs/mobile-Money",
+              "api-docs/Mobile-Money",
+              "api-docs/Faas",
               "api-docs/Using-the-API",
               "api-docs/Moving-to-production"
             ]
@@ -26,17 +27,28 @@
            {
             "group": "Learn about",
             "pages": [
-               
-                "api-docs/Collection",
-                "api-docs/Disbursement",
                 {
-                  "group": "Payment widgets",
+                  "group": "Payments",
                   "pages": [
-                     "api-docs/Checkout-Integration",
-                     "api-docs/Button-Integration"   
+                     "api-docs/Collection",
+                     "api-docs/Disbursement",
+                     "api-docs/Refund",
+                    {
+                      "group": "Widgets",
+                      "pages":[
+                        "api-docs/SoleasPay-Checkout",
+                        "api-docs/SoleasPay-Button",
+                        "api-docs/PayLink",
+                        "api-docs/Ebill",
+                        "api-docs/Plugins"
+                      ]
+                    } 
                   ]
                 },
-              "api-docs/Links"
+              "api-docs/E-business",
+              "api-docs/Virtual-card",
+              "api-docs/So-connect",
+              "api-docs/Verify-Transaction"
             ]
           }
         ]
@@ -47,7 +59,17 @@
           {
             "group": " AUTH ENDPOINTS",
             "pages": [
+              "api-reference/endpoint/getApikey",
               "api-reference/endpoint/getBearer"
+            ]
+          },
+          {
+            "group": "Payments",
+            "pages": [
+              "api-reference/endpoint/collection",
+              "api-reference/endpoint/disbursement",
+              "api-reference/endpoint/refund",
+              "api-reference/endpoint/verify-Transaction"
             ]
           },
           {
@@ -55,23 +77,18 @@
             "pages": [
               "api-reference/endpoint/userCard",
               "api-reference/endpoint/listUser",
+              "api-reference/endpoint/updateUser",
               "api-reference/endpoint/create",
               "api-reference/endpoint/getDetails",
-              "api-reference/endpoint/cardTrans"
+              "api-reference/endpoint/cardTrans",
+              "api-reference/endpoint/cardAction",
+              "api-reference/endpoint/cardDelete"
             ]
           },
+          
           {
-            "group": "Payments",
+            "group": "So-Connect",
             "pages": [
-              "api-reference/endpoint/collectionPayment",
-              "api-reference/endpoint/disbursePayment",
-              "api-reference/endpoint/verifyTransaction"
-            ]
-          },
-          {
-            "group": "SoConnect",
-            "pages": [
-              "link/introduction",
               "link/endpoint/initWallet",
               "link/endpoint/initTrans",
               "link/endpoint/fiat"

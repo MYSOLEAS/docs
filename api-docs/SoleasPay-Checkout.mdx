@@ -1,36 +1,24 @@
 ---
-title: "Checkout Integration"
-description: "This document is an integration manual for version 2 of SOLEASPAY's online payment form for e-commerce websites, sales pages, web/mobile applications, or even desktop applications.  This module will allow your customers to pay for your products or services directly online using all payment methods available on SoleasPay."
+title: "Checkout Form"
+description: "SoleasPay's online payment form for e-commerce websites, sales funnel, web/mobile applications, or even desktop applications."
 ---
 
 <Note>
   While the installation of this module is straightforward, it does require basic technical skills in website or web application development, particularly in JavaScript.
 </Note>
 
-## The API KEY
+## Requirement
+  * A verified SoleasPay Account
+  * A live Apikey
 
-Before beginning integration, ensure you have already:
+## Usage
+  This feature can be support two mode :
+  * Normal mode :
+    
+    You implement this form in your application at the end of your order checkout process to invite customer completed the payment. When he submit the checkout form, a custom payment page apear and he select the prefered service to completed the current transaction. 
+  * API mode :
 
-1. Created a MERCHANT or PROFESSIONAL account on [SOLEASPAY](https://soleaspay.com)
-2. Received your access key (APIKEY) via email
-
-If you don't have an APIKEY yet, send a simple email to ([support@mysoleas.com](mailto:support@mysoleas.com)) with:
-
-- Your request for an API key
-- The phone number and email associated with your account
-
-You should receive it within hours or minutes.
-
-<Card title="SOLEASPAY" icon="globe" href="https://soleaspay.com">
-  Visit our website for more details
-</Card>
-
-<Warning>
-  To receive your APIKEY, you must complete administrative formalities:
-
-  - Signed contract
-  - Business registration documents or any other required documentation for financial operators and administrations, as part of anti-money laundering and cybercrime prevention measures
-</Warning>
+    In this mode, you submit the checkout form on your application and SoleasPay will return a payment link where you can redirect your customer to complete this transaction.
 
 ## Integration
 
@@ -40,10 +28,6 @@ Installing the SoleasPay Checkout involves implementing an HTML form as follows:
 
 [Verify Pay](https://doc.soleaspay.com/api-reference/endpoint/verifyTransaction)
 
-Use this endpoint to check payment status:
-Check if the payment is validated by the customer using the unique order ID and the SoleasPay payment reference (payId). Requires x-api-key and optional headers like operation and service.
-
-### <a id="verify-pay-endpoint" />
 
 [Convert](https://doc.soleaspay.com/api-reference/endpoint/converter)
 
@@ -103,3 +87,9 @@ Convert an amount from one currency to another using ISO 4217 codes. If the ‘t
   </div>
 </form>
 ```
+
+<Warning>
+  Depending on your need choose between normal or api mode. The unique implementation difference is the form action link url:
+  - For normal mode it's : https://checkout.soleaspay.com
+  - For api mode it's : https://checkout.soleaspay.com?mode=api
+</Warning>

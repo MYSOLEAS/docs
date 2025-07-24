@@ -1,8 +1,9 @@
 ---
-title: Payouts
+title: Disbursement
+description: Disburse funds from your SoleasPay account to yours customers
 ---
 
-##  Payouts (Withdrawal)
+##  Disbursement (PayOut)
 
 You can disburse funds from your **SoleasPay account** to a **customer’s mobile money wallet**.
 
@@ -48,7 +49,7 @@ When an **MMO is temporarily unavailable or experiencing issues**, payouts may n
 
 In these cases:
 
-- The payout is still **accepted by SoleasPay**, but marked as `ENQUEUED`.
+- The payout is still **accepted by SoleasPay**, but marked as `PROCESSING`.
 - The request is **automatically processed later** when the MMO is back online.
 
 ### 🛑 Cancelling Enqueued Payouts
@@ -79,4 +80,4 @@ Ensure your integration:
 - Implements retry or cancellation logic for `ENQUEUED` payouts.
 
 
-For more details visite  [payout api-reference](https://doc.soleaspay.com/api-reference/endpoint/disbursePayment). 
+For more details visite  [payout api-reference](https://doc.soleaspay.com/api-reference/endpoint/disbursement). 

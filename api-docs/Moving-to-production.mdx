@@ -1,24 +1,18 @@
----
 
 When transitioning from sandbox to **production**, ensure your integration is updated with the following changes:
 
-## ✅ Key Differences Between Environments
-
+## Key Differences Between Environments
+There are two authentifications types in SoleasPay environment
 | Parameter           | Sandbox                        | Production                      |
 | ------------------- | ------------------------------ | ------------------------------- |
-| **Base URL**        | `http://sandbox.soleaspay.com` | `https://soleaspay.com`         |
+| **Base URL**        | https://sandbox.soleaspay.com  | https://soleaspay.com           |
 | **Token**           | Sandbox Bearer Token           | Production Bearer Token         |
 | **MMO Environment** | Simulated Transactions         | Live Mobile Wallet Transactions |
-
-> 🧠 **Tip**: Store environment configs in `.env` files or a secrets manager (e.g., `.env.production` vs `.env.development`).
-
----
 
 ## 🔐 IP Whitelisting (Optional)
 
 If your production system uses **IP whitelisting**, don’t forget to whitelist SoleasPay’s callback IPs, or **your server won’t receive status updates** for transactions.
 
----
 
 # Go-Live Testing (Pre-Launch Checklist)
 
@@ -42,17 +36,19 @@ We recommend toggling a **feature flag** (e.g. `USE_SOLEASPAY_LIVE = true`) in y
 ---
 
 ## Example Test Flow
+To disburse money from your SoleasPay account to a final customer you just need to call this endpoint, 
 
 ```bash
-curl --request POST \
+curl -i -X POST \
   --url https://soleaspay.com/api/action/account/withdraw \
-  --header 'Authorization: Bearer <PRODUCTION_TOKEN>' \
-  --header 'operation: 4' \
-  --header 'service: 1' \
+  --header 'Authorization: Bearer <received token>' \
   --header 'Content-Type: application/json' \
-  --data '{
-  "wallet": "677XXXXXX",
-  "amount": 500,
-  "currency": "XAF"
-}'
+  --header 'operation: <operation>' \
+  --header 'service: <service>' \
+  -data '{
+    "wallet": "677777777",
+    "amount": 10000,
+    "currency": "XAF"
+    "description": "withdraw reason"
+  }'
 ```
